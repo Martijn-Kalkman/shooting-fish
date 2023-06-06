@@ -1,10 +1,12 @@
 import { ImageSource, Loader } from 'excalibur';
-import fishImage from '../images/fish.png';
+import playerimg from '../images/spacee.png';
+import enemyimg from '../images/alien.png';
 
 const Resources = {
-  Fish: new ImageSource(fishImage),
+  player: new ImageSource(playerimg),
+  enemy: new ImageSource(enemyimg),
 };
 
-const ResourceLoader = new Loader([Resources.Fish]);
+const ResourceLoader = new Loader([Resources.player, Resources.enemy]);
 
 export { Resources, ResourceLoader };
