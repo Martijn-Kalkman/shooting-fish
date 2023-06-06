@@ -1,24 +1,25 @@
-import { Actor, Vector } from "excalibur";
+import { Actor, CollisionType, Shape, Vector } from 'excalibur';
 import { Resources } from './resources.js';
 
-export class Enemy extends Actor {
+export class alien extends Actor {
   constructor() {
-    super();
-    this.graphics.use(Resources.Enemy.toSprite());
-    this.pos = new Vector(Math.random() * (innerWidth - 100), Math.random() * (innerHeight - 100));
-    this.vel = new Vector(0, 0);
-    this.enableCapturePointer = true;
-
-    this.on("pointerup", (event) => {
-      this.kill();
+    super({
+      collisionType: CollisionType.Passive,
+      collider: Shape.Box(60, 40),
     });
+    this.graphics.use(Resources.enemy.toSprite());
+    this.pos = new Vector(
+      Math.random() * (window.innerWidth - 100),
+      -100
+    );
+    this.vel = new Vector(0, 100);
   }
 
   update(engine, delta) {
     super.update(engine, delta);
 
-    if (this.pos.x + this.width < 0) {
-      this.pos.x = innerWidth;
+    if (this.pos.y > engine.drawHeight) {
+      this.kill();
     }
   }
 }
